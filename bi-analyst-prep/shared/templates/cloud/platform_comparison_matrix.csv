@@ -1,0 +1,9 @@
+Criteria,AWS,AWS Notes,Azure,Azure Notes,GCP,GCP Notes,Databricks,Databricks Notes,Snowflake,Snowflake Notes
+Primary Warehouse Service,Redshift,,Synapse,,BigQuery,,SQL Warehouse,,Virtual Warehouses,
+Storage Foundation,S3,,ADLS Gen2,,GCS,,Delta Lake on cloud storage,,S3/ADLS/GCS,
+Orchestration,Step Functions / MWAA,,Data Factory / Synapse pipelines,,Cloud Composer,,Jobs / Workflows,,Task services,
+Security & IAM,IAM / Lake Formation,,Azure AD / Purview,,Cloud IAM / VPC-SC,,Unity Catalog,,Role-based policies,
+Cost Model,On-demand & reserved nodes,,DWUs / serverless per TB,,On-demand & reservations,,DBU & cluster charges,,Credits per second,
+Strengths,,,,,,,,,
+Risks / Considerations,,,,,,,,,
+Recommended Use Cases,,,,,,,,,

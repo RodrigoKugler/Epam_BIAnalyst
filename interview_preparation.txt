@@ -1,0 +1,83 @@
+
+2
+
+Automatic Zoom
+Tech Interview Preparation Guide for BI Analyst
+I. Role Overview
+• Objective: To bridge business and technical teams by providing actionable insights
+from data analysis and reporting.
+• Key Responsibilities:
+o Stakeholder communication and requirement elicitation.
+o Data profiling, modeling, warehousing, and visualization.
+o Collaboration in agile environments to deliver data-driven solutions.
+II. Core Technical Skills
+1. SQL for Data Analysis
+• Syntax Mastery:
+o Proficient with SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY.
+o Writing optimized and efficient queries.
+• Joins:
+o Mastery of INNER, LEFT, RIGHT, FULL OUTER joins and their appropriate use.
+• Aggregate Functions:
+o Familiarity with SUM, MIN, MAX, AVG, COUNT.
+• Window Functions:
+o Ability to use ROW_NUMBER, RANK, and other functions for advanced
+calculations.
+• Operators:
+o Understand UNION vs UNION ALL.
+• Database Keys:
+o Primary and foreign key concepts for relational integrity.
+• Problem-Solving:
+o Solving complex queries involving multiple tables, relationships, and
+aggregate functions.
+2. Data Modeling
+• Dimensional Modeling:
+o Concepts of star and snowflake schemas.
+• Fact and Dimension Tables:
+o Clear understanding of purpose and design.
+• Relationships:
+o Types of relationships: 1-1, 1-M, M-M.
+• Normalization vs Denormalization:
+o Understanding when to apply and its effects on data efficiency.
+• Slowly Changing Dimensions (SCD):
+o Knowledge of different types of SCDs and their application.
+3. Data Warehousing (DWH) Fundamentals
+• Architecture:
+o Understanding of typical DWH architecture, including data marts.
+• DWH vs Data Lake:
+o Key differences and use cases.
+• Modeling Approaches:
+o Familiarity with Kimball and Inmon methodologies.
+• OLTP vs OLAP:
+o Differences between transactional and analytical processing.
+4. ETL/ELT Processes
+• Processes:
+o Mastery of extraction, transformation, and loading techniques.
+• Transformations:
+o Deduplication, data type changes, and cleansing.
+• Data Sources:
+o Extracting from databases, APIs, and files (Excel, CSV).
+5. Visualization and Tools
+• Tools:
+o Power BI and Tableau expertise.
+• Power BI Skills:
+o Dashboard/report creation, understanding filter types, implementing Row-
+Level Security (RLS).
+• Chart Selection:
+o Using appropriate chart types for data storytelling.
+• Cross-Tool Comparisons:
+o Understanding of pros and cons for Power BI, Tableau, and others.
+6. Cloud Platforms
+• GCP, Azure, AWS:
+o Understanding BigQuery, Synapse, Databricks, and similar cloud tools.
+III. Best Practices and Methodologies
+1. Agile Methodologies
+• Scrum:
+o Understanding ceremonies like stand-ups, sprint planning, reviews, and
+retrospectives.
+• Kanban:
+o Knowledge of workflows and continuous improvement.
+• Application:
+o Using Agile principles to deliver iterative value.
+2. Business Analysis
+• Requirement Elicitation:
+o Techniques: Interviews, workshops, surveys, documentation analysis.
