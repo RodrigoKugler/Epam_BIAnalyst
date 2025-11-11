@@ -1,8 +1,4 @@
----
----
-
-@import "just-the-docs";
-
+/* Custom branding overrides for just-the-docs theme */
 :root {
   --brand-bg: #0b1739;
   --brand-accent: #1dd3b0;
@@ -48,7 +44,8 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80') center/cover;
+  background: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80")
+    center/cover;
   opacity: 0.18;
   mix-blend-mode: screen;
 }
@@ -95,8 +92,7 @@ body {
   font-weight: 600;
   font-size: 0.95rem;
   letter-spacing: 0.02em;
-  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease,
-    color 150ms ease;
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease, color 150ms ease;
   text-decoration: none;
 }
 
@@ -302,3 +298,4 @@ body {
 .page-nav a:focus::after {
   width: 100%;
 }
+
