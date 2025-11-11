@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BI Analyst Interview Training</title>
+    <meta
+      name="description"
+      content="Structured BI analyst interview preparation covering SQL, modeling, warehousing, pipelines, visualization, cloud, agile, and business analysis."
+    />
+    <style>
+      :root {
+        --navy-900: #0b193d;
+        --navy-800: #10265a;
+        --navy-600: #1f3a7a;
+        --navy-400: #4a5c92;
+        --teal-400: #1dd3b0;
+        --teal-500: #15b198;
+        --teal-600: #0f907a;
+        --slate-100: #f5f7fb;
+        --slate-200: #e4e9f3;
+        --slate-400: #7d8bad;
+        --white: #ffffff;
+        --radius-lg: 20px;
+        --radius-md: 14px;
+        --shadow-elevated: 0 24px 48px rgba(11, 25, 61, 0.16);
+        --shadow-soft: 0 12px 24px rgba(11, 25, 61, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+        line-height: 1.6;
+        background: var(--slate-100);
+        color: var(--navy-900);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--teal-500);
+        outline-offset: 4px;
+      }
+
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 1rem;
+        padding: 0.5rem 1rem;
+        background: var(--navy-900);
+        color: var(--white);
+        border-radius: 999px;
+        transition: top 0.2s ease;
+        text-decoration: none;
+        z-index: 100;
+      }
+
+      .skip-link:focus {
+        top: 1rem;
+      }
+
+      header {
+        background: linear-gradient(135deg, var(--navy-900), var(--navy-600));
+        color: var(--white);
+        padding: clamp(2.5rem, 5vw, 4.25rem) clamp(1.5rem, 6vw, 5rem);
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top right, rgba(29, 211, 176, 0.24), transparent 55%);
+        opacity: 0.85;
+      }
+
+      .hero {
+        position: relative;
+        max-width: 960px;
+        z-index: 1;
+      }
+
+      .hero__pretitle {
+        text-transform: uppercase;
+        letter-spacing: 0.26rem;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.65);
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+      }
+
+      .hero h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(2.6rem, 6vw, 3.6rem);
+        line-height: 1.1;
+      }
+
+      .hero__body {
+        max-width: 640px;
+        color: rgba(232, 240, 255, 0.92);
+        margin-bottom: clamp(1.5rem, 4vw, 2.4rem);
+      }
+
+      .hero__cta {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.85rem 1.75rem;
+        border-radius: 999px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      }
+
+      .btn--solid {
+        background: var(--teal-400);
+        color: var(--navy-900);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .btn--solid:hover {
+        background: var(--teal-500);
+        transform: translateY(-2px);
+        box-shadow: 0 16px 32px rgba(21, 177, 152, 0.3);
+      }
+
+      .btn--ghost {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .btn--ghost:hover {
+        background: rgba(255, 255, 255, 0.18);
+        transform: translateY(-2px);
+      }
+
+      main {
+        padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 6vw, 5rem) 4rem;
+      }
+
+      .section {
+        max-width: 1100px;
+        margin: 0 auto clamp(3rem, 8vw, 5rem);
+        scroll-margin-top: 6rem;
+      }
+
+      .section__eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.18rem;
+        font-size: 0.75rem;
+        color: var(--teal-500);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .section h2 {
+        margin: 0 0 1rem;
+        font-size: clamp(1.9rem, 3vw, 2.4rem);
+      }
+
+      .section__intro {
+        margin: 0 0 clamp(1.5rem, 4vw, 2.5rem);
+        color: var(--navy-400);
+        max-width: 720px;
+      }
+
+      .pillar-group {
+        margin-bottom: clamp(2rem, 6vw, 3rem);
+      }
+
+      .pillar-group h3 {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 1.25rem;
+        margin: 0 0 1.25rem;
+        color: var(--navy-800);
+      }
+
+      .card-grid {
+        display: grid;
+        gap: clamp(1.25rem, 3vw, 1.75rem);
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+
+      .card {
+        background: var(--white);
+        border-radius: var(--radius-md);
+        padding: 1.75rem;
+        box-shadow: var(--shadow-soft);
+        border: 1px solid rgba(16, 38, 90, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-elevated);
+      }
+
+      .card__title {
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1rem;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--navy-900);
+      }
+
+      .card__badge {
+        font-size: 0.75rem;
+        color: var(--teal-600);
+        background: rgba(29, 211, 176, 0.16);
+        padding: 0.25rem 0.6rem;
+        border-radius: 999px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .card__body {
+        margin: 0;
+        color: var(--navy-400);
+        flex-grow: 1;
+      }
+
+      .card__meta {
+        margin: 0;
+        font-size: 0.85rem;
+        color: var(--navy-400);
+      }
+
+      .timeline {
+        position: relative;
+        padding-left: 1.5rem;
+        border-left: 2px solid rgba(16, 38, 90, 0.12);
+        display: grid;
+        gap: 1.75rem;
+      }
+
+      .timeline__item {
+        position: relative;
+        background: var(--white);
+        padding: 1.5rem 1.75rem;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-soft);
+        border: 1px solid rgba(16, 38, 90, 0.08);
+      }
+
+      .timeline__item::before {
+        content: "";
+        position: absolute;
+        left: -2.1rem;
+        top: 1.8rem;
+        width: 0.85rem;
+        height: 0.85rem;
+        border-radius: 50%;
+        background: var(--teal-400);
+        box-shadow: 0 0 0 6px rgba(29, 211, 176, 0.2);
+      }
+
+      .timeline__item h3 {
+        margin: 0 0 0.6rem;
+        font-size: 1.15rem;
+        color: var(--navy-900);
+      }
+
+      .timeline__item p {
+        margin: 0;
+        color: var(--navy-400);
+      }
+
+      .resource-band {
+        background: linear-gradient(135deg, rgba(29, 211, 176, 0.14), rgba(15, 144, 122, 0.14));
+        border-radius: var(--radius-lg);
+        padding: clamp(1.75rem, 5vw, 3rem);
+        display: grid;
+        gap: 1.5rem;
+        align-items: center;
+        border: 1px solid rgba(15, 144, 122, 0.25);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .resource-band__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.85rem;
+      }
+
+      footer {
+        padding: 2.5rem clamp(1.5rem, 6vw, 5rem) 2.75rem;
+        background: var(--navy-900);
+        color: rgba(255, 255, 255, 0.7);
+        text-align: center;
+        font-size: 0.95rem;
+      }
+
+      footer a {
+        color: var(--teal-400);
+        text-decoration: none;
+      }
+
+      @media (max-width: 720px) {
+        header,
+        main {
+          padding: clamp(2rem, 8vw, 3rem) clamp(1rem, 5vw, 2rem);
+        }
+
+        .timeline {
+          border-left: none;
+          padding-left: 0;
+        }
+
+        .timeline__item::before {
+          left: 1rem;
+          top: -0.5rem;
+          transform: translateY(-50%);
+        }
+
+        .timeline__item {
+          padding-top: 2.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <header>
+      <div class="hero">
+        <p class="hero__pretitle">BI Analyst Learning Journey</p>
+        <h1>Master the blend of technical depth and business storytelling for BI interviews.</h1>
+        <p class="hero__body">
+          A streamlined curriculum that mirrors real hiring expectations—covering SQL mastery, analytics
+          engineering, enterprise modeling, cloud data stacks, agile delivery, and stakeholder partnership so you
+          walk into interviews with clarity and confidence.
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--solid" href="#curriculum">Explore Curriculum</a>
+          <a class="btn btn--ghost" href="#resources">Download Assets</a>
+        </div>
+      </div>
+    </header>
+    <main id="main">
+      <section class="section" id="curriculum">
+        <p class="section__eyebrow">Curriculum highlights</p>
+        <h2>Everything you need to speak to the full BI delivery lifecycle.</h2>
+        <p class="section__intro">
+          Each module is distilled into ready-to-use notes, labs, and interview prompts. Use these cards to focus
+          your study blocks or remix them into workshops and onboarding guides.
+        </p>
+
+        <div class="pillar-group">
+          <h3>Core Technical Skills</h3>
+          <div class="card-grid">
+            <article class="card">
+              <h4 class="card__title">
+                SQL for Data Analysis <span class="card__badge">✅ Published</span>
+              </h4>
+              <p class="card__body">
+                Build fluency with joins, window functions, performance tuning, and realistic interview exercises
+                that move from exploratory analysis to production-ready reporting.
+              </p>
+              <p class="card__meta">Includes labs, practice bank, and STAR storytelling prompts.</p>
+            </article>
+            <article class="card">
+              <h4 class="card__title">
+                Data Modeling <span class="card__badge">✅ Published</span>
+              </h4>
+              <p class="card__body">
+                Compare dimensional, Data Vault, and modern semantic layers while practicing SCD handling and
+                governance-ready design reviews.
+              </p>
+              <p class="card__meta">Templates, ERD outlines, and roadmap examples included.</p>
+            </article>
+            <article class="card">
+              <h4 class="card__title">
+                Data Warehousing Fundamentals <span class="card__badge">✅ Published</span>
+              </h4>
+              <p class="card__body">
+                Evaluate ELT versus ETL patterns, set quality guardrails, and tackle cost-performance tradeoffs from
+                intake through consumption.
+              </p>
+              <p class="card__meta">Features incremental load walkthroughs and capacity calculators.</p>
+            </article>
+            <article class="card">
+              <h4 class="card__title">
+                ETL &amp; ELT Processes <span class="card__badge">✅ Published</span>
+              </h4>
+              <p class="card__body">
+                Architect resilient pipelines with observability, recovery playbooks, automation strategies, and
+                analytics engineering best practices.
+              </p>
+              <p class="card__meta">dbt workflows, CDC scenarios, and runbook templates.</p>
+            </article>
+            <article class="card">
+              <h4 class="card__title">
+                Visualization &amp; BI Tools <span class="card__badge">✅ Published</span>
+              </h4>
+              <p class="card__body">
+                Learn to craft narratives across Power BI, Tableau, and Looker with emphasis on accessibility,
+                adoption, and performance.
+              </p>
+              <p class="card__meta">Accessibility checklists and comparison labs included.</p>
+            </article>
+            <article class="card">
+              <h4 class="card__title">
+                Cloud Platforms <span class="card__badge">✅ Published</span>
+              </h4>
+              <p class="card__body">
+                Navigate AWS, Azure, GCP, Databricks, and Snowflake tradeoffs—covering architecture, governance, and
+                cost optimization for BI programs.
+              </p>
+              <p class="card__meta">Selection matrices and architecture blueprints.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="pillar-group">
+          <h3>Best Practices &amp; Methodologies</h3>
+          <div class="card-grid">
+            <article class="card">
+              <h4 class="card__title">
+                Agile Methodologies <span class="card__badge">✅ Published</span>
+              </h4>
+              <p class="card__body">
+                Adapt Scrum, Kanban, and hybrid cadences for analytics teams with sprint, backlog, and experiment
+                playbooks tuned for data work.
+              </p>
+              <p class="card__meta">Simulation labs, retro templates, and delivery metrics.</p>
+            </article>
+            <article class="card">
+              <h4 class="card__title">
+                Business Analysis <span class="card__badge">✅ Published</span>
+              </h4>
+              <p class="card__body">
+                Lead stakeholder discovery, prioritize roadmaps, and manage change with BI-focused facilitation and
+                decision frameworks.
+              </p>
+              <p class="card__meta">Interview kits, process maps, and value case templates.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="experience">
+        <p class="section__eyebrow">Learning experience</p>
+        <h2>A practical loop that converts study time into confident interview stories.</h2>
+        <p class="section__intro">
+          Rotate through these four moments to keep your preparation balanced between technical depth and
+          stakeholder storytelling.
+        </p>
+        <div class="timeline">
+          <article class="timeline__item">
+            <h3>Review &amp; Understand</h3>
+            <p>
+              Digest curated write-ups, mental models, and edge cases that explain why BI solutions succeed inside
+              fast-moving organizations.
+            </p>
+          </article>
+          <article class="timeline__item">
+            <h3>Practice &amp; Apply</h3>
+            <p>
+              Work through SQL labs, modeling outlines, pipeline runbooks, and dashboard briefs to prove out concepts
+              in context.
+            </p>
+          </article>
+          <article class="timeline__item">
+            <h3>Tell the Story</h3>
+            <p>
+              Translate the wins and lessons into STAR narratives so you can respond to behavioral prompts with
+              clarity and measurable impact.
+            </p>
+          </article>
+          <article class="timeline__item">
+            <h3>Share &amp; Iterate</h3>
+            <p>
+              Use the review checklists and feedback workflows to get eyes on your work, refine your approach, and
+              keep materials production-ready.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="resources">
+        <p class="section__eyebrow">Next steps</p>
+        <h2>Customize the content, practice with templates, and keep iterating.</h2>
+        <div class="resource-band">
+          <div>
+            <h3 style="margin: 0 0 0.75rem; font-size: 1.45rem; color: var(--navy-800);">
+              Ready to personalize the toolkit?
+            </h3>
+            <p style="margin: 0; color: var(--navy-400); max-width: 640px;">
+              Clone the project, remix modules into your own playbooks, and export templates for your study group or
+              onboarding cohorts. Everything is designed to be edited, versioned, and shipped.
+            </p>
+          </div>
+          <div class="resource-band__actions">
+            <a class="btn btn--solid" href="https://github.com/your-org/bi-analyst-training" target="_blank" rel="noopener">
+              View Repository
+            </a>
+            <a class="btn btn--ghost" href="https://example.com/templates.zip" target="_blank" rel="noopener">
+              Download Templates
+            </a>
+            <a class="btn btn--ghost" href="https://example.com/curriculum.pdf" target="_blank" rel="noopener">
+              Export Curriculum PDF
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      Built for BI candidates who balance analytics engineering and stakeholder fluency. Questions? Reach out at
+      <a href="mailto:analytics@example.com">analytics@example.com</a>.
+    </footer>
+  </body>
+</html>
+
+
