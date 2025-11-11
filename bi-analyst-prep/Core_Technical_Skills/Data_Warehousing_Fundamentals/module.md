@@ -177,14 +177,22 @@ Data warehouses consolidate disparate sources into a trusted analytical foundati
 ---
 
 ## Practice Question Bank
-1. **Case**: Sales leadership wants a single source of truth for quarterly revenue. Propose a warehouse architecture and explain how you’d ensure accuracy.
-2. **Design**: Compare staging, core, and presentation layers in your warehouse. What transformations happen where, and why?
-3. **Performance**: A report against a massive fact table is slow. Describe optimization options across Snowflake, BigQuery, and Synapse.
-4. **Governance**: How do you enforce data access controls without slowing down delivery?
-5. **Troubleshooting**: A nightly load failed halfway through. Outline your incident response and remediation steps.
-6. **Cost Control**: What techniques keep warehouse costs predictable as usage grows?
-7. **Behavioral**: Tell me about a time you helped migrate from siloed reporting to a centralized warehouse. What challenges did you overcome?
-8. **Advanced**: Explain the differences between Kimball and Data Vault in a modern cloud context; when would you combine them?
+1. **Case**: Sales leadership wants a single source of truth for quarterly revenue. Propose a warehouse architecture and explain how you’d ensure accuracy.  
+   **Answer:** I’d design a layered architecture: raw ingestion that replicates source systems, a curated core with conformed dimensions and fact tables, and presentation marts tailored to finance. Accuracy comes from CDC-based incremental loads, reconciliations against source totals, automated data quality tests, and a governed metric definition of revenue agreed with finance. Dashboards consume only the certified mart to keep everyone aligned.
+2. **Design**: Compare staging, core, and presentation layers in your warehouse. What transformations happen where, and why?  
+   **Answer:** Staging mirrors source structures with minimal transformation for auditability. The core (curated) layer standardizes joins, applies business rules, and builds conformed dimensions and fact tables. Presentation remodels the data into subject-specific marts and aggregates optimized for BI tools. This separation keeps raw lineage intact, centralizes logic once, and delivers consumer-friendly models without polluting upstream layers.
+3. **Performance**: A report against a massive fact table is slow. Describe optimization options across Snowflake, BigQuery, and Synapse.  
+   **Answer:** In Snowflake I’d examine clustering keys, leverage result caching, or spin up a larger but time-bound virtual warehouse. In BigQuery I’d ensure proper partitioning/clustering, materialize heavy joins, and consider BI Engine caching. In Synapse I’d evaluate distribution styles, create aggregate tables, and assign workloads to resource classes. Across all platforms I’d confirm queries project only needed columns and apply filters early.
+4. **Governance**: How do you enforce data access controls without slowing down delivery?  
+   **Answer:** I implement role-based access tied to identity providers, define security zones (public, confidential), and use row/column masking where required. Access requests flow through a lightweight approval workflow logged in our catalog. We automate policy deployment via infrastructure-as-code so provisioning is fast and auditable, and publish certified datasets so self-service users don’t need raw access.
+5. **Troubleshooting**: A nightly load failed halfway through. Outline your incident response and remediation steps.  
+   **Answer:** I’d acknowledge the incident to stakeholders, stop downstream consumption if data is stale, and inspect orchestration logs to locate the failing step. After fixing the root cause—maybe a schema change or API outage—I rerun the job with safeguards like idempotent MERGEs. Post-incident, I document the root cause analysis, add alerts or tests to catch the issue earlier, and update runbooks.
+6. **Cost Control**: What techniques keep warehouse costs predictable as usage grows?  
+   **Answer:** Right-size compute (suspend idle warehouses, use auto-scaling judiciously), push heavy workloads to scheduled windows, and monitor usage via cost dashboards. I favor partitioning and pruning to reduce scanned data, implement workload isolation, and educate analysts to reuse curated datasets. For Snowflake/BigQuery I evaluate reserved capacity or flex slots when we have steady demand.
+7. **Behavioral**: Tell me about a time you helped migrate from siloed reporting to a centralized warehouse. What challenges did you overcome?  
+   **Answer:** At a retail client, each region maintained its own reports. I led the migration to a Snowflake-based warehouse, harmonizing product and customer dimensions and rolling out standardized metrics. Challenges included distrust of centralized data and differing definitions; we solved it through collaborative workshops, iterative deliveries, and a governance council. The result was unified executive reporting and a 40% reduction in time spent reconciling numbers.
+8. **Advanced**: Explain the differences between Kimball and Data Vault in a modern cloud context; when would you combine them?  
+   **Answer:** Kimball emphasizes dimensional models tailored for analytics, whereas Data Vault captures raw, auditable history with hubs, links, and satellites. In the cloud, compute elasticity lets us implement both: Data Vault for agile ingestion and lineage, Kimball marts for business-friendly consumption. I combine them when source systems evolve frequently but end users still need curated, performant analytics.
 
 ---
 

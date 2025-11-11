@@ -187,14 +187,22 @@ Modern BI teams operate in cloud ecosystems. Analysts must understand how data f
 ---
 
 ## Practice Question Bank
-1. **Case**: A global company wants to centralize analytics in the cloud. Which platform do you recommend and why?
-2. **Design**: Compare designing a BI architecture on Snowflake vs BigQuery for a SaaS company.
-3. **Performance**: How would you reduce BigQuery query costs for large ad-hoc analytics workloads?
-4. **Governance**: Outline a governance framework for a multi-team Azure Synapse deployment.
-5. **Behavioral**: Tell me about a time you influenced a platform decision; what was the impact?
-6. **Security**: How do you enforce row-level security when using Snowflake with Power BI?
-7. **Advanced**: Explain how Databricks Lakehouse differs from traditional warehouses and when you’d adopt it.
-8. **Troubleshooting**: A scheduled pipeline in Cloud Composer keeps failing. Walk through your debugging approach.
+1. **Case**: A global company wants to centralize analytics in the cloud. Which platform do you recommend and why?  
+   **Answer:** I’d start with a requirements matrix—regions of operation, existing skill sets, data volumes, integration needs, and governance mandates. If they need cross-cloud flexibility and strong data sharing, Snowflake or Databricks may win; if they are already invested in Google Workspace and want serverless simplicity, BigQuery is compelling. I present the comparison transparently, highlight migration considerations, and recommend the platform that best aligns with their workloads, team skills, and compliance profile.
+2. **Design**: Compare designing a BI architecture on Snowflake vs BigQuery for a SaaS company.  
+   **Answer:** On Snowflake I lean on multi-cluster warehouses to isolate workloads, streams/tasks for ELT, and Snowflake Secure Data Sharing for customer-facing analytics. On BigQuery I emphasize federated ingestion, partitioned/clustered tables, materialized views, and BI Engine acceleration. Both support semi-structured data and strong security; the choice often hinges on runtime model (pay-per-second warehouses vs slot-based compute), ecosystem tooling, and preference for ANSI SQL vs BigQuery extensions.
+3. **Performance**: How would you reduce BigQuery query costs for large ad-hoc analytics workloads?  
+   **Answer:** I’d audit which queries drive the biggest scanned bytes, then apply partitioning and clustering so BigQuery only reads relevant data. I’d encourage analysts to use `SELECT` columns explicitly, leverage materialized views or summary tables for heavy joins, and consider reservations or flex slots for predictable usage. Usage monitoring and Looker/Power BI semantic layers also help funnel ad-hoc consumers toward optimized datasets.
+4. **Governance**: Outline a governance framework for a multi-team Azure Synapse deployment.  
+   **Answer:** I’d segment workspaces by environment, enforce Azure AD-based RBAC, and manage access through security groups mapped to least-privilege roles. Data is cataloged in Purview with lineage to Synapse pipelines; sensitive data sits behind column- and row-level security policies. Deployment pipelines run through Azure DevOps with mandatory code reviews, automated tests, and approvals. Monitoring dashboards track pipeline health, costs, and RLS policy audits so leadership sees governance working in practice.
+5. **Behavioral**: Tell me about a time you influenced a platform decision; what was the impact?  
+   **Answer:** In a prior role, sales and product teams pushed for Snowflake while engineering favored staying on-prem. I facilitated discovery workshops, quantified the cost of status quo, and ran a POC comparing pipeline runtimes, governance overhead, and TCO. Presenting the findings with stakeholder testimonials shifted leadership toward Snowflake. Post-migration, refresh times improved by 60% and analysts delivered new dashboards weekly instead of monthly.
+6. **Security**: How do you enforce row-level security when using Snowflake with Power BI?  
+   **Answer:** I map business roles to Snowflake roles and create secure views that filter data using context such as region or business unit. In Power BI, I configure single sign-on via Azure AD so user identity flows to Snowflake through SSO or OAuth. The dataset uses DirectQuery or cached extracts sourced from the secure view, ensuring RLS evaluations happen in Snowflake. We test with “view as role” scenarios and audit query history to confirm policies hold.
+7. **Advanced**: Explain how Databricks Lakehouse differs from traditional warehouses and when you’d adopt it.  
+   **Answer:** Databricks fuses data lake flexibility with warehouse governance via Delta Lake, notebooks, and ML integrations. Unlike traditional warehouses that expect structured data and SQL-only access, Lakehouse lets teams run streaming, ML, and BI workloads on the same storage with ACID guarantees. I’d adopt it when an organization needs to blend batch, streaming, and ML at scale or wants open table formats with multi-cloud optionality.
+8. **Troubleshooting**: A scheduled pipeline in Cloud Composer keeps failing. Walk through your debugging approach.  
+   **Answer:** I’d inspect the DAG run history and task logs to isolate which operator fails and whether it’s transient. Next, I’d review recent code or dependency changes, check upstream data availability, and confirm service account permissions. If it’s resource-related, I adjust Composer environment size or worker concurrency. Throughout, I communicate status to stakeholders and add guardrails—retries with exponential backoff, alerting, and data quality checks—to prevent silent failures.
 
 ---
 

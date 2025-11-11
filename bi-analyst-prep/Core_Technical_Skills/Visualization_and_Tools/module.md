@@ -172,14 +172,22 @@ Visualization is where insights meet decision makers. BI Analysts must balance a
 ---
 
 ## Practice Question Bank
-1. **Case**: Sales asks for a dashboard showing global performance. Outline discovery questions, design approach, and tool choice rationale.
-2. **Design**: When would you choose a bullet chart over a gauge? Provide business scenarios.
-3. **Governance**: How do you manage certified vs ad-hoc dashboards in Power BI or Tableau?
-4. **Performance**: A dashboard takes 30 seconds to load. How do you diagnose and fix it?
-5. **Behavioral**: Describe a time you balanced stakeholder design requests with best practices.
-6. **Security**: Explain how you implemented row-level security for a sensitive dataset and validated compliance.
-7. **Advanced**: Compare building semantic models in Power BI vs LookML in Looker.
-8. **Troubleshooting**: Filters behave unexpectedly after a recent change. Walk through your debugging process.
+1. **Case**: Sales asks for a dashboard showing global performance. Outline discovery questions, design approach, and tool choice rationale.  
+   **Answer:** I’d clarify which audiences need the view, what decisions they make, the cadence of review, and how sales regions are defined today. I’d prototype a balanced scorecard layout with KPI tiles, trend lines, and drill-through to regional detail. Tool selection depends on ecosystem fit: Power BI if we already rely on Microsoft stack and need row-level security via Azure AD; Tableau if we need rapid storytelling and cross-platform sharing. I make that recommendation after weighing licensing, data connectivity, and governance needs.
+2. **Design**: When would you choose a bullet chart over a gauge? Provide business scenarios.  
+   **Answer:** Bullet charts shine when you need to show actual performance against target with qualitative ranges and compact space—perfect for executive scorecards tracking monthly quota attainment across many products. Gauges convey a single KPI but consume more real estate and lack context. I pull out bullet charts when the conversation is about progress toward goal with room to compare peers on one page.
+3. **Governance**: How do you manage certified vs ad-hoc dashboards in Power BI or Tableau?  
+   **Answer:** I maintain separate workspaces or projects: certified content lives in a governed area with approval workflows, version control, and refresh monitoring, while ad-hoc work stays in personal or team sandboxes. Certified dashboards require documented data sources, RLS validation, and owner accountability. We label content visibly so users know what they can trust, and periodically review usage to ensure the certified catalog stays relevant.
+4. **Performance**: A dashboard takes 30 seconds to load. How do you diagnose and fix it?  
+   **Answer:** I check data source latency, visual-level queries, and any heavy calculations. In Power BI I analyze performance analyzer traces; in Tableau I use Performance Recorder. Fixes might include aggregating data upstream, limiting high-cardinality visuals, optimizing DAX/LOD logic, or switching slow DirectQuery visuals to import mode. I retest after each change and document the improvements for future reference.
+5. **Behavioral**: Describe a time you balanced stakeholder design requests with best practices.  
+   **Answer:** A marketing VP wanted a 3D pie chart to “wow” executives. I acknowledged the intent, showed how a bar + variance callout told the story more clearly, and mocked both versions in a quick session. Presenting the pros/cons and impact on readability won them over, and the final dashboard led to clearer campaign decisions and higher adoption because stakeholders could interpret it instantly.
+6. **Security**: Explain how you implemented row-level security for a sensitive dataset and validated compliance.  
+   **Answer:** In Power BI I created security roles tied to region attributes in the model and synced them with Azure AD groups. Testing with “View as” confirmed users only saw their territory. We documented the mapping, captured screenshots for auditors, and monitored audit logs to ensure no bypass. For Tableau, I’ve used user filters backed by entitlement tables with similar validation steps.
+7. **Advanced**: Compare building semantic models in Power BI vs LookML in Looker.  
+   **Answer:** Power BI semantic models sit inside the dataset, defined through relationships, DAX measures, and perspectives—great for analysts who prefer a GUI blended with code. LookML is pure code, defining explores, views, and reusable dimensions/measures; it enforces centralized governance and version control. Power BI offers tighter integration with Microsoft tools, while Looker excels at governed self-service across browsers. Choice depends on team skill set and how strictly you need to manage semantic definitions.
+8. **Troubleshooting**: Filters behave unexpectedly after a recent change. Walk through your debugging process.  
+   **Answer:** I review the change log to understand what shifted—new relationships, calculation edits, or filter context alterations. In Power BI I inspect filter propagation and use the performance analyzer to see query transformations; in Tableau I check filter order and worksheet-level filters. I recreate the issue in a copy, revert the suspected change, and test step by step until the behavior stabilizes. Documenting the root cause prevents future regressions.
 
 ---
 

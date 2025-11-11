@@ -165,14 +165,22 @@ Effective business analysis ensures analytics teams solve the right problems and
 ---
 
 ## Practice Question Bank
-1. **Case**: A business leader requests a dashboard with unclear metrics. Walk through your requirement-gathering approach.
-2. **Design**: How do you document requirements to ensure alignment between business stakeholders and data engineers?
-3. **Prioritization**: Multiple departments request conflicting metrics. How do you decide what to deliver first?
-4. **Behavioral**: Describe a project where unclear requirements caused rework. What would you do differently now?
-5. **Communication**: How do you explain data limitations to stakeholders who demand immediate solutions?
-6. **Scope Control**: Mid-project, stakeholders introduce new KPIs. How do you handle the change?
-7. **Validation**: Outline your process for ensuring analytics deliverables meet business expectations before launch.
-8. **Advanced**: Discuss how you incorporate regulatory requirements into analytics solutions from the start.
+1. **Case**: A business leader requests a dashboard with unclear metrics. Walk through your requirement-gathering approach.  
+   **Answer:** I start with discovery questions that uncover the decision they’re trying to make, success signals, and pain points with current reporting. I co-create problem statements and capture candidate metrics, then validate data availability with engineering. Before building, I summarize what I heard—personas, KPIs, filters, refresh cadence—and secure sign-off so the request moves from “idea” to scoped requirement.
+2. **Design**: How do you document requirements to ensure alignment between business stakeholders and data engineers?  
+   **Answer:** I pair narrative artifacts with structured specs: a dashboard brief for business context, user stories with acceptance criteria, and a data dictionary covering sources, transformations, and metric formulas. Everything feeds into a traceability matrix so each requirement maps to development tasks and UAT tests. This keeps business and technical teams reading from the same sheet of music.
+3. **Prioritization**: Multiple departments request conflicting metrics. How do you decide what to deliver first?  
+   **Answer:** I facilitate a prioritization session using an impact-versus-effort or RICE framework, grounding the discussion in organizational objectives and data readiness. Where conflicts remain, I escalate with a transparent recommendation that outlines trade-offs and dependencies. The goal is a shared roadmap everyone can reference, not a black-box decision.
+4. **Behavioral**: Describe a project where unclear requirements caused rework. What would you do differently now?  
+   **Answer:** Early in my career I built a sales dashboard assuming “revenue” meant invoiced amounts; finance expected cash receipts and we rebuilt significant portions. Now I insist on a shared glossary, confirm metric formulas in writing, and run a quick wireframe review before development starts. Those checkpoints catch semantic gaps before code is written.
+5. **Communication**: How do you explain data limitations to stakeholders who demand immediate solutions?  
+   **Answer:** I acknowledge the urgency, then outline the constraint in plain language—what data is missing, why it matters, and what risks come with pushing ahead. I offer alternatives like interim metrics, manual stopgaps, or a phased delivery plan. Framing it as a joint decision, backed by impact analysis, keeps trust intact while we work the constraint.
+6. **Scope Control**: Mid-project, stakeholders introduce new KPIs. How do you handle the change?  
+   **Answer:** I treat it as a change request: document the new KPI, assess data availability and effort with the team, and show how it affects timeline or other commitments. We decide together whether to swap scope, extend the schedule, or defer to a later release. Capturing the decision in our backlog and comms ensures transparency.
+7. **Validation**: Outline your process for ensuring analytics deliverables meet business expectations before launch.  
+   **Answer:** I run structured UAT that traces back to acceptance criteria. Stakeholders test real scenarios, we log findings, and I only exit UAT when critical issues are resolved. In parallel we validate numbers against trusted sources, update documentation, and confirm downstream impacts (alerts, exports). A go-live checklist with sign-offs closes the loop.
+8. **Advanced**: Discuss how you incorporate regulatory requirements into analytics solutions from the start.  
+   **Answer:** During discovery I involve compliance partners to catalogue relevant regulations, required controls, and audit evidence. I embed those into requirements—masking rules, retention windows, approval workflows—and reflect them in technical design (RLS, logging). We track compliance tasks in the backlog and include them in DoD so controls are first-class citizens, not afterthoughts.
 
 ---
 

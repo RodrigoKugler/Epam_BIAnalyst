@@ -181,14 +181,22 @@ Strong modeling skill improves time-to-insight, reduces rework, and boosts trust
 ---
 
 ## Practice Question Bank
-1. **Case**: Marketing wants to segment customers by engagement; outline the data model supporting the initiative, detailing facts, dimensions, and conformed attributes.
-2. **Design**: Explain the grain of an order fact table that supports order-level, item-level, and return analysis simultaneously.
-3. **SCD**: How would you handle changes to a salesperson’s region assignment while preserving historical reporting?
-4. **Normalization**: Provide examples of update anomalies that occur when a table is insufficiently normalized.
-5. **Performance**: When would you create an aggregate fact table? What are the maintenance implications?
-6. **Quality**: Describe how you’d detect and correct a multi-source dimension mismatch (customer master vs CRM).
-7. **Behavioral**: Tell me about a time you redesigned a model to solve a reporting bottleneck. What metrics improved?
-8. **Advanced**: Compare and contrast Kimball and Data Vault approaches in a modern cloud data platform.
+1. **Case**: Marketing wants to segment customers by engagement; outline the data model supporting the initiative, detailing facts, dimensions, and conformed attributes.  
+   **Answer:** I’d model a behavioral fact table at the customer-by-period grain capturing interactions (emails opened, sessions, purchases) sourced from multiple systems. Dimensions would include a conformed customer dimension enriched with demographic attributes, a calendar dimension, and campaign and product dimensions. Engagement scores become measures, and conformed dimensions ensure the same customer definition is used across marketing and sales analytics.
+2. **Design**: Explain the grain of an order fact table that supports order-level, item-level, and return analysis simultaneously.  
+   **Answer:** I set the grain at one row per order line item, enabling item-level metrics while still rolling up to order totals via degenerate order keys. Returns can be modeled either as negative quantities in the same fact with a return indicator or as a related fact linked through the same surrogate keys, giving flexibility to analyze both original sales and reverse logistics.
+3. **SCD**: How would you handle changes to a salesperson’s region assignment while preserving historical reporting?  
+   **Answer:** A Type 2 SCD dimension fits: each salesperson has surrogate-keyed rows with effective start/end dates and a current flag. When a region changes, I close the old record, insert a new one, and downstream facts join on the surrogate key captured at transaction time. Reports using date filters automatically respect history, while current assignments are available via the current flag.
+4. **Normalization**: Provide examples of update anomalies that occur when a table is insufficiently normalized.  
+   **Answer:** If customer contact details live in every order row, updating a phone number risks inconsistent values (update anomaly). Inserting a new customer without an order may fail because required order fields are missing (insert anomaly). Deleting the last order could remove the only record of the customer (delete anomaly). Normalization separates these concerns to avoid such pitfalls.
+5. **Performance**: When would you create an aggregate fact table? What are the maintenance implications?  
+   **Answer:** I build aggregate facts when dashboards repeatedly query the same heavy joins at higher grain (e.g., daily sales by region). Aggregates pre-summarize data, slashing query cost and latency. Maintenance means incremental refreshes aligned with the base fact, validation to ensure aggregates reconcile, and versioning when business definitions shift.
+6. **Quality**: Describe how you’d detect and correct a multi-source dimension mismatch (customer master vs CRM).  
+   **Answer:** I profile both sources, compare keys and critical attributes, and surface discrepancies in a reconciliation report. For mismatches I create mapping rules or golden records—often via a mastering process that selects the authoritative value per field. Automated data quality tests watch for drift, and any manual overrides are documented so downstream consumers trust the dimension.
+7. **Behavioral**: Tell me about a time you redesigned a model to solve a reporting bottleneck. What metrics improved?  
+   **Answer:** At a SaaS firm, renewal reporting relied on a tangled view hitting multiple OLTP tables. I introduced a clean star schema with a subscription fact and conformed customer/product dimensions. Query time dropped from minutes to seconds, finance gained confidence in ARR metrics, and stakeholder satisfaction scores jumped because monthly close reports were no longer a fire drill.
+8. **Advanced**: Compare and contrast Kimball and Data Vault approaches in a modern cloud data platform.  
+   **Answer:** Kimball focuses on business-friendly dimensional models optimized for analytics; it’s quick to deliver but less flexible when sources churn. Data Vault prioritizes agility and auditability with hubs, links, and satellites that capture raw lineage but require downstream marts for usability. In cloud environments I often land raw data via Data Vault for resilience and then publish Kimball-style marts for consumption, leveraging cloud compute to automate both layers.
 
 ---
 

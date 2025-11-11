@@ -173,14 +173,22 @@ Agile frameworks help BI teams deliver value continuously, adapt to changing que
 ---
 
 ## Practice Question Bank
-1. **Case**: Your team faces constant ad-hoc requests disrupting planned work. How would you redesign the process using agile principles?
-2. **Design**: Walk through how you’d plan a two-week sprint to deliver a new KPI dashboard.
-3. **Process**: Explain the differences between Scrum and Kanban and when you’d choose each for analytics teams.
-4. **Behavioral**: Describe a time you led a retrospective that resulted in meaningful process changes.
-5. **Stakeholder**: How do you manage competing priorities among executives requesting analytics work?
-6. **Scaling**: How do you coordinate multiple BI squads working on a shared roadmap?
-7. **Metrics**: Which agile metrics do you monitor for a BI team and why?
-8. **Troubleshooting**: A sprint failed to deliver committed stories. Diagnose root causes and remedial actions.
+1. **Case**: Your team faces constant ad-hoc requests disrupting planned work. How would you redesign the process using agile principles?  
+   **Answer:** I would stand up a lightweight intake process that routes urgent requests through a clearly labeled “fast lane” on our Kanban board, capped with a strict WIP limit. Everything else flows through backlog refinement so we can size, prioritize, and slot stories into sprints with stakeholder agreement. During sprint planning we reserve a buffer for inevitable surprises, and communicate trade-offs visibly so sponsors see the impact of injecting new work.
+2. **Design**: Walk through how you’d plan a two-week sprint to deliver a new KPI dashboard.  
+   **Answer:** I start by validating that the user stories meet our Definition of Ready—data access confirmed, stakeholders aligned on KPIs, and acceptance criteria locked. In planning, we break the work into thin vertical slices (data prep, model updates, visualization, QA) and sequence them so dependencies clear early. We commit only to the work that fits team capacity, document the Definition of Done (validated data, documentation, sign-off), and schedule mid-sprint demos to gather early feedback.
+3. **Process**: Explain the differences between Scrum and Kanban and when you’d choose each for analytics teams.  
+   **Answer:** Scrum works best when we can time-box work into sprints and deliver increments—ideal for project-style analytics efforts like new dashboards. Kanban shines when demand is unpredictable or continuous, such as production support or minor enhancements. Scrum gives cadenced ceremonies and velocity measures; Kanban gives flow-based metrics and flexibility. I often blend them: Scrum for planned initiatives with a Kanban swimlane for truly urgent analytics asks.
+4. **Behavioral**: Describe a time you led a retrospective that resulted in meaningful process changes.  
+   **Answer:** In a previous BI squad, recurring data access delays tanked our sprint predictability. I facilitated a “Start/Stop/Continue” retro that surfaced the root cause—unclear ownership for access requests. We agreed to add an “access confirmed” checklist item to our Definition of Ready and set up a Slack escalation channel with data engineering. Within two sprints our carryover dropped by half and stakeholder trust rebounded because we met our commitments again.
+5. **Stakeholder**: How do you manage competing priorities among executives requesting analytics work?  
+   **Answer:** I host a short, recurring prioritization forum where executives review the backlog against agreed strategic themes and capacity. We use a transparent scoring model (impact, urgency, effort, dependencies) so trade-offs are explicit. When new requests emerge mid-sprint, I show what has to give way and seek a conscious decision rather than quietly overloading the team. This keeps sponsors aligned and makes saying “not now” respectful and data-backed.
+6. **Scaling**: How do you coordinate multiple BI squads working on a shared roadmap?  
+   **Answer:** We maintain a shared program board that visualizes cross-squad dependencies and quarterly objectives. Scrum-of-Scrums meetings let leads flag risks early, and we standardize backlog structures so stories hand off cleanly between data engineering, modeling, and visualization squads. We also align on shared definitions—DoR, DoD, naming conventions—so each team can operate autonomously without diverging from the overall roadmap.
+7. **Metrics**: Which agile metrics do you monitor for a BI team and why?  
+   **Answer:** I track sprint velocity trends to understand sustainable delivery, sprint burndown to spot mid-sprint risk, and carryover to gauge planning accuracy. For Kanban-style work I rely on cycle time and throughput to see how quickly requests flow. I complement these with qualitative metrics—stakeholder satisfaction pulses and adoption signals—because delivering “done” stories that nobody uses isn’t success.
+8. **Troubleshooting**: A sprint failed to deliver committed stories. Diagnose root causes and remedial actions.  
+   **Answer:** First I review the sprint board and stand-up notes to distinguish between scope creep, underestimated work, or external blockers. I bring the team together for a blameless mini-retro to surface patterns—maybe data access lagged or our stories were too chunky. Remediation usually means tightening DoR, slicing stories more finely, and renegotiating stakeholder response times for dependencies. We adjust capacity forecasts for upcoming sprints so we’re not repeating the same mistake.
 
 ---
 

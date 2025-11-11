@@ -171,14 +171,22 @@ Effective pipelines power reliable dashboards and decision-making. BI Analysts f
 ---
 
 ## Practice Question Bank
-1. **Case**: An executive dashboard is frequently stale. Outline how you’d redesign the pipeline for fresher data while managing cost.
-2. **Design**: Compare ETL and ELT for a legacy ERP integration. What factors drive your choice?
-3. **Troubleshooting**: A nightly job succeeded but produced fewer rows than expected. How do you investigate?
-4. **Performance**: Large `MERGE` operations time out. Describe optimization strategies.
-5. **Governance**: How do you enforce data contracts with upstream teams to avoid breaking downstream pipelines?
-6. **Behavioral**: Discuss a time when you automated error recovery. What tools and processes did you implement?
-7. **Advanced**: Explain how dbt fits into an ELT pipeline. What are its strengths/limitations compared to traditional ETL tools?
-8. **Security**: Ensure PII stays protected during extraction and transformation. What controls do you put in place?
+1. **Case**: An executive dashboard is frequently stale. Outline how you’d redesign the pipeline for fresher data while managing cost.  
+   **Answer:** I would move critical transformations closer to real time by adopting incremental loads—perhaps micro-batches every hour—while leaving non-critical data on the nightly cadence. Using change tracking reduces data volume, and orchestrating through Airflow or ADF with dependency-aware scheduling keeps pipelines efficient. I’d pair this with SLAs, freshness monitoring, and cost dashboards so leadership understands the trade-off between latency and spend.
+2. **Design**: Compare ETL and ELT for a legacy ERP integration. What factors drive your choice?  
+   **Answer:** ETL may be necessary if compliance dictates masking before landing data in the warehouse or if the ERP exposes limited compute. ELT shines when the warehouse offers scalable compute and we want to preserve raw data for downstream uses. I assess data volume, transformation complexity, latency, and governance requirements. In modern stacks I favor ELT with staged raw tables, then dbt or SQL transformations, unless regulatory or technical constraints force ETL.
+3. **Troubleshooting**: A nightly job succeeded but produced fewer rows than expected. How do you investigate?  
+   **Answer:** I compare row counts against historical baselines, examine change-detection logic for unintended filters, and check source system logs for missing data. If a join or filter changed, I review recent code commits. I rerun the job in a sandbox after adjusting parameters to confirm the fix, then add regression tests or anomaly alerts so similar discrepancies surface immediately.
+4. **Performance**: Large `MERGE` operations time out. Describe optimization strategies.  
+   **Answer:** I’d ensure source data is deduplicated and pre-partitioned, split merges into smaller batches, and leverage clustering or indexes appropriate to the platform. Using staging tables to capture only changed records and applying `MERGE` with sorted keys reduces locking. On Snowflake/BigQuery/Databricks, scaling compute temporarily during heavy loads can also help—as long as the job remains idempotent.
+5. **Governance**: How do you enforce data contracts with upstream teams to avoid breaking downstream pipelines?  
+   **Answer:** We publish a clear schema, data quality expectations, and SLAs, backed by automated contract tests that run whenever upstream schemas change. Any violation triggers alerts routed to both teams, and we manage schema evolution through versioned APIs or change windows. Regular syncs and shared backlog items keep contracts living documents, not shelfware.
+6. **Behavioral**: Discuss a time when you automated error recovery. What tools and processes did you implement?  
+   **Answer:** At a streaming media company, manual restarts consumed hours. I added retry logic with exponential backoff in Airflow, built dead-letter queues for bad records, and integrated PagerDuty alerts with runbook links. Failures dropped by 70%, and when issues occurred, on-call engineers resolved them in minutes instead of hours because the automation isolated root causes quickly.
+7. **Advanced**: Explain how dbt fits into an ELT pipeline. What are its strengths/limitations compared to traditional ETL tools?  
+   **Answer:** dbt excels at SQL-based transformations: version-controlled models, dependency graphs, tests, and documentation. It leverages warehouse compute directly, making ELT workflows transparent and modular. Limitations include less native support for complex orchestration, streaming, or heavy procedural logic—those often require complementary tools like Airflow or Spark. For analytics engineering, though, dbt’s developer workflow is hard to beat.
+8. **Security**: Ensure PII stays protected during extraction and transformation. What controls do you put in place?  
+   **Answer:** I restrict credentials via secret managers, extract only required fields, and apply masking or tokenization before landing sensitive data where possible. Pipeline service accounts follow least privilege, data at rest and in transit is encrypted, and we audit access logs regularly. Downstream, I enforce role-based access and dynamic masking so analysts see only what they are cleared to view.
 
 ---
 
