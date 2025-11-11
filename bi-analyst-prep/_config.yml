@@ -2,6 +2,7 @@ title: BI Analyst Interview Training
 email: analytics-team@example.com
 baseurl: ""
 url: ""
+source: docs
 
 remote_theme: just-the-docs/just-the-docs
 
