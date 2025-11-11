@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Agile Methodologies
-parent: Best Practices & Methodologies
+parent: "Best Practices & Methodologies"
 nav_order: 1
 last_reviewed: 2025-11-10
 reviewer: Rodrigo (BI Lead)

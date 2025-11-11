@@ -1,6 +1,6 @@
 ---
 layout: default
-title: ETL & ELT Processes
+title: "ETL & ELT Processes"
 parent: Core Technical Skills
 nav_order: 4
 last_reviewed: 2025-11-10

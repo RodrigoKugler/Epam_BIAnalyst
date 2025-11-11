@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Business Analysis
-parent: Best Practices & Methodologies
+parent: "Best Practices & Methodologies"
 nav_order: 2
 last_reviewed: 2025-11-10
 reviewer: Rodrigo (BI Lead)

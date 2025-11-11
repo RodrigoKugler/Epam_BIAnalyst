@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Visualization & BI Tools
+title: "Visualization & BI Tools"
 parent: Core Technical Skills
 nav_order: 5
 last_reviewed: 2025-11-10

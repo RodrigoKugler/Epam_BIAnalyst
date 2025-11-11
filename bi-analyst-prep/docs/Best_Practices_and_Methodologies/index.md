@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Best Practices & Methodologies
+title: "Best Practices & Methodologies"
 nav_order: 4
 has_children: true
 ---
